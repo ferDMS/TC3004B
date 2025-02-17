@@ -1,4 +1,4 @@
-import Square from "../components/Square";
+import Square from "./Square";
 
 export default function Chess({ rows, cols }) {
     const rowsList = Array.from({ length: cols }, (_, i) => i);
