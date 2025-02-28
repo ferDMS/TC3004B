@@ -5,7 +5,7 @@ import React from "react";
 // Type definitions
 interface WeatherCardProps {
   city: string;
-  subcity: string;
+  country: string;
   temperature: number;
   unit: string;
   stats: StatProps[];
@@ -14,7 +14,7 @@ interface WeatherCardProps {
 
 interface WeatherHeaderProps {
   city: string;
-  subcity: string;
+  country: string;
   temperature: number;
   unit: string;
 }
@@ -44,7 +44,7 @@ interface WeatherForecastProps {
 // Sub-components
 const WeatherHeader: React.FC<WeatherHeaderProps> = ({
   city,
-  subcity,
+  country,
   temperature,
   unit,
 }) => {
@@ -52,7 +52,7 @@ const WeatherHeader: React.FC<WeatherHeaderProps> = ({
     <header className="flex justify-between items-start mb-2.5">
       <div className="text-orange-300">
         <h1 className="mb-0.5 text-2xl font-bold leading-7">{city}</h1>
-        <p className="text-base italic font-medium leading-4">{subcity}</p>
+        <p className="text-base italic font-medium leading-4">{country}</p>
       </div>
       <div className="flex items-start">
         <span className="text-4xl font-bold leading-10 text-orange-300">
@@ -69,7 +69,7 @@ const WeatherHeader: React.FC<WeatherHeaderProps> = ({
 const StatItem: React.FC<StatProps> = ({ iconUrl, value }) => {
   return (
     <div className="flex gap-1 items-center">
-      <img src={iconUrl} alt="" className="h-[9px] w-[11px]" />
+      <img src={iconUrl} alt="" className="h-[0.563rem] w-[0.688rem]" />
       <span className="text-xs font-bold leading-relaxed text-stone-300">
         {value}
       </span>
@@ -101,6 +101,7 @@ const WeatherStats: React.FC<WeatherStatsProps> = ({
           />
         ))}
       </div>
+      <div />
     </section>
   );
 };
@@ -123,13 +124,19 @@ const ForecastDay: React.FC<ForecastDayProps> = ({
       <h3 className="mb-0.5 text-xs font-bold leading-3 text-orange-200">
         {day}
       </h3>
-      <img src={iconUrl} alt="" className="mx-0 my-0.5 h-[25px] w-[25px]" />
+      <img
+        src={iconUrl}
+        alt=""
+        className="mx-0 my-0.5 h-[1.563rem] w-1.563rem]"
+      />
       <p className="mb-3.5 text-xs font-bold leading-3 text-stone-300">
         {highTemp}
       </p>
       <div className="flex flex-col gap-1 items-center">
-        <p className="text-xs leading-loose text-stone-300">{lowTemp}</p>
-        <p className="text-xs leading-loose text-stone-300">{precipitation}</p>
+        <p className="text-[0.6rem] leading-loose text-stone-300">{lowTemp}</p>
+        <p className="text-[0.6rem] leading-loose text-stone-300">
+          {precipitation}
+        </p>
       </div>
     </div>
   );
@@ -156,7 +163,7 @@ const WeatherForecast: React.FC<WeatherForecastProps> = ({ forecast }) => {
 
 const WeatherCard: React.FC<WeatherCardProps> = ({
   city,
-  subcity,
+  country,
   temperature,
   unit,
   stats,
@@ -173,10 +180,10 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
         rel="stylesheet"
       />
-      <article className="p-2.5 bg-slate-500 h-auto w-auto max-md:scale-90 max-sm:scale-[0.8] font-['Inter']">
+      <article className="p-2.5 bg-slate-600 h-auto w-auto max-md:scale-90 max-sm:scale-[0.8] font-['Inter'] rounded-lg">
         <WeatherHeader
           city={city}
-          subcity={subcity}
+          country={country}
           temperature={temperature}
           unit={unit}
         />
@@ -191,9 +198,9 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
 const WeatherCardDemo: React.FC = () => {
   // Sample data for the weather card
   const weatherData = {
-    city: "Vatican City",
-    subcity: "Vatican City",
-    temperature: 1.6,
+    city: "Mexico City",
+    country: "Mexico",
+    temperature: 26.6,
     unit: "°C",
     stats: [
       {
@@ -230,41 +237,36 @@ const WeatherCardDemo: React.FC = () => {
     forecast: [
       {
         day: "FRI",
-        iconUrl:
-          "https://cdn.builder.io/api/v1/image/assets/TEMP/b24e6af9c80a606d8e2e2d4bd5045da886ff1dfd",
+        iconUrl: "/weather/cloudy.png",
         highTemp: "5.7°C",
         lowTemp: "0°C",
         precipitation: "0 mm",
       },
       {
         day: "FRI",
-        iconUrl:
-          "https://cdn.builder.io/api/v1/image/assets/TEMP/b24e6af9c80a606d8e2e2d4bd5045da886ff1dfd",
+        iconUrl: "/weather/sunny.png",
         highTemp: "5.7°C",
         lowTemp: "0°C",
         precipitation: "0 mm",
       },
       {
         day: "FRI",
-        iconUrl:
-          "https://cdn.builder.io/api/v1/image/assets/TEMP/b24e6af9c80a606d8e2e2d4bd5045da886ff1dfd",
+        iconUrl: "/weather/vcloudy.png",
         highTemp: "5.7°C",
         lowTemp: "0°C",
         precipitation: "0 mm",
       },
       {
         day: "FRI",
-        iconUrl:
-          "https://cdn.builder.io/api/v1/image/assets/TEMP/b24e6af9c80a606d8e2e2d4bd5045da886ff1dfd",
+        iconUrl: "/weather/vrainy.png",
         highTemp: "5.7°C",
         lowTemp: "0°C",
         precipitation: "0 mm",
       },
       {
         day: "FRI",
-        iconUrl:
-          "https://cdn.builder.io/api/v1/image/assets/TEMP/b24e6af9c80a606d8e2e2d4bd5045da886ff1dfd",
-        highTemp: "5.7°C",
+        iconUrl: "/weather/snowy.png",
+        highTemp: "35.7°C",
         lowTemp: "0°C",
         precipitation: "0 mm",
       },
@@ -274,7 +276,7 @@ const WeatherCardDemo: React.FC = () => {
   return (
     <WeatherCard
       city={weatherData.city}
-      subcity={weatherData.subcity}
+      country={weatherData.country}
       temperature={weatherData.temperature}
       unit={weatherData.unit}
       stats={weatherData.stats}
