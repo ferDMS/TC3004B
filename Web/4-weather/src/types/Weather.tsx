@@ -1,14 +1,22 @@
 export default interface Weather {
-  temperature: number;
-  humidity: number;
-  windSpeed: number;
-  description: string; // e.g., "sunny", "cloudy", etc.
-  location: {
+  id: number;
+  header: {
     city: string;
     country: string;
+    temperature: number;
+    unit: string;
   };
-  pressure: number;
-  visibility: number;
-  sunrise: string;
-  sunset: string;
+  stats: {
+    iconUrl: string;
+    title: string;
+    value: string;
+    unit: string;
+  }[];
+  forecast: {
+    day: string;
+    iconUrl: string;
+    highTemp: string;
+    lowTemp: string;
+    precipitation: string;
+  }[];
 }
