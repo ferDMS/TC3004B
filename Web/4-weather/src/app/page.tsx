@@ -127,7 +127,7 @@ export default function Home() {
       header: {
         city: geolocationData.results[0].name,
         country: country,
-        temperature: weatherData.current.temperature_2m,
+        temperature: Math.round(weatherData.current.temperature_2m),
         unit: weatherData.current_units.temperature_2m,
       },
       stats: [
@@ -180,8 +180,12 @@ export default function Home() {
         weather.forecast.push({
           day: "XXX",
           iconUrl: "/weather/forecast/sunny.png",
-          highTemp: `${weatherData.daily.temperature_2m_max[i]} ${temp_max_units}`,
-          lowTemp: `${weatherData.daily.temperature_2m_min[i]} ${temp_min_units}`,
+          highTemp: `${Math.round(
+            weatherData.daily.temperature_2m_max[i]
+          )} ${temp_max_units}`,
+          lowTemp: `${Math.round(
+            weatherData.daily.temperature_2m_min[i]
+          )} ${temp_min_units}`,
           precipitation: `${weatherData.daily.precipitation_sum[i]} ${prec_units}`,
         });
       }
