@@ -1,5 +1,4 @@
 export default interface Weather {
-  id: number;
   header: {
     city: string;
     country: string;

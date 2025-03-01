@@ -5,15 +5,10 @@ import React from "react";
 import Weather from "@/types/Weather";
 import WeatherCard from "@/components/WeatherCard";
 
-interface WeatherCardDemoProps {
-  id: number;
-}
-
 // Main component with sample data
-const WeatherCardDemo: React.FC<WeatherCardDemoProps> = ({ id }) => {
+const WeatherCardDemo: React.FC = () => {
   // Sample data for the weather card
   const weatherData: Weather = {
-    id: id,
     header: {
       city: "Mexico City",
       country: "Mexico",
