@@ -125,7 +125,7 @@ export default function Home() {
     // Build weather object
     const weather: Weather = {
       header: {
-        city: city,
+        city: geolocationData.results[0].name,
         country: country,
         temperature: weatherData.current.temperature_2m,
         unit: weatherData.current_units.temperature_2m,
@@ -140,8 +140,8 @@ export default function Home() {
         {
           iconUrl: "weather/stats/eye.png",
           title: "Visibility",
-          value: weatherData.current.visibility.toString(),
-          unit: weatherData.current_units.visibility,
+          value: (weatherData.current.visibility / 1000).toString(),
+          unit: "km",
         },
         {
           iconUrl: "weather/stats/rays.png",
@@ -172,17 +172,19 @@ export default function Home() {
     };
 
     // Add forecasts to weather object
-    const temp_max_units = weatherData.daily_units.temperature_2m_max;
-    const temp_min_units = weatherData.daily_units.temperature_2m_min;
-    const prec_units = weatherData.daily_units.precipitation_sum;
-    for (let i = 0; i < weatherData.daily.temperature_2m_max.length; i++) {
-      weather.forecast.push({
-        day: "XXX",
-        iconUrl: "/weather/forecast/sunny.png",
-        highTemp: `${weatherData.daily.temperature_2m_max[i]} ${temp_max_units}`,
-        lowTemp: `${weatherData.daily.temperature_2m_min[i]} ${temp_min_units}`,
-        precipitation: `${weatherData.daily.precipitation_sum[i]} ${prec_units}`,
-      });
+    if (weatherData.daily.temperature_2m_max.length > 0) {
+      const temp_max_units = weatherData.daily_units.temperature_2m_max;
+      const temp_min_units = weatherData.daily_units.temperature_2m_min;
+      const prec_units = weatherData.daily_units.precipitation_sum;
+      for (let i = 0; i < 5; i++) {
+        weather.forecast.push({
+          day: "XXX",
+          iconUrl: "/weather/forecast/sunny.png",
+          highTemp: `${weatherData.daily.temperature_2m_max[i]} ${temp_max_units}`,
+          lowTemp: `${weatherData.daily.temperature_2m_min[i]} ${temp_min_units}`,
+          precipitation: `${weatherData.daily.precipitation_sum[i]} ${prec_units}`,
+        });
+      }
     }
 
     // Push weather object to weatherList
@@ -190,11 +192,11 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-[100vh] py-[5rem] space-y-10 justify-center items-center bg-slate-100 text-black">
-      <h1 className="text-5xl text-slate-600 font-bold">Weather Scope</h1>
-      <p>Stay updated with real-time weather reports!</p>
-      <p>
-        🌤️ Simply enter a city name in the search bar below to get the latest
+    <main className="flex flex-col min-h-[100vh] py-[5rem] px-[5rem] space-y-10 justify-center items-center bg-slate-100 text-black">
+      <h1 className="text-5xl text-slate-600 font-bold">☀️ Weather Scope ❄️</h1>
+      <h2 className="text-xl">Stay updated with real-time weather reports!</h2>
+      <p className="text-center">
+        Simply enter a city name in the search bar below to get the latest
         temperature, conditions, and forecasts at a glance.
       </p>
 
@@ -202,7 +204,7 @@ export default function Home() {
         <WeatherSearchBar onSearch={fetchInfo} />
       </div>
 
-      <div className="grid grid-cols-3 w-[80%] gap-8">
+      <div className="grid grid-cols-2 w-[80%] gap-8">
         {/* Providing a unique key prop to each component in a list is crucial
         for React's reconciliation process. The key helps React identify which
         items have changed, been added, or removed, allowing it to update the UI
@@ -211,6 +213,6 @@ export default function Home() {
           <WeatherCard key={index} weather={weather} />
         ))}
       </div>
-    </div>
+    </main>
   );
 }

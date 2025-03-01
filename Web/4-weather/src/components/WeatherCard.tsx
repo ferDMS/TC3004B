@@ -49,7 +49,7 @@ const WeatherHeader: React.FC<WeatherHeaderProps> = ({
   unit,
 }) => {
   return (
-    <header className="flex justify-between items-start mb-2.5">
+    <header className="flex justify-between items-start">
       <div className="text-orange-300">
         <h1 className="mb-0.5 text-2xl font-bold leading-7">{city}</h1>
         <p className="text-base italic font-medium leading-4">{country}</p>
@@ -69,8 +69,12 @@ const WeatherHeader: React.FC<WeatherHeaderProps> = ({
 const StatItem: React.FC<StatProps> = ({ iconUrl, title, value, unit }) => {
   return (
     <div className="flex gap-1 items-center">
-      <img src={iconUrl} alt="" className="flex max-w-[1rem]" />
-      <span className="leading-relaxed text-stone-300">
+      <img
+        src={iconUrl}
+        alt=""
+        className="flex max-w-[1.5rem] max-h-[1.2rem]"
+      />
+      <span className="ml-2 leading-relaxed text-stone-300">
         <span className="text-xs">{title}: </span>
         <span className="text-sm font-bold">{value}</span>
         <span className="text-xs font-light"> {unit}</span>
@@ -84,7 +88,7 @@ const WeatherStats: React.FC<WeatherStatsProps> = ({
   rightStats,
 }) => {
   return (
-    <section className="flex justify-between mb-2.5">
+    <section className="flex justify-between">
       <div className="flex flex-col gap-1.5">
         {leftStats.map((stat, index) => (
           <StatItem
@@ -114,7 +118,7 @@ const WeatherStats: React.FC<WeatherStatsProps> = ({
 
 const Divider: React.FC = () => {
   return (
-    <div className="mx-2 mt-4 mb-0 w-0.5 bg-orange-200 rounded-2xl opacity-50 h-[6rem]" />
+    <div className="mt-4 w-0.5 bg-orange-200 rounded-2xl opacity-50 h-[6rem]" />
   );
 };
 
@@ -126,18 +130,12 @@ const ForecastDay: React.FC<ForecastDayProps> = ({
   precipitation,
 }) => {
   return (
-    <div className="flex flex-col items-center w-11">
-      <h3 className="mb-0.5 text-sm font-bold leading-3 text-orange-200">
-        {day}
-      </h3>
-      <img
-        src={iconUrl}
-        alt=""
-        className="mx-0 my-0.5 h-[1.563rem] w-1.563rem]"
-      />
-      <p className="mb-3.5 text-sm font-bold leading-3 text-stone-300">
-        {highTemp}
-      </p>
+    <div className="flex flex-col justify-between w-[5rem]">
+      <div className="flex flex-col items-center justify-between h-[5rem]">
+        <h3 className="text-sm font-bold leading-3 text-orange-200">{day}</h3>
+        <img src={iconUrl} alt="" className="h-[2rem] w-[2rem]" />
+        <p className="text-sm font-bold leading-3 text-stone-300">{highTemp}</p>
+      </div>
       <div className="flex flex-col gap-1 items-center">
         <p className="text-xs leading-loose text-stone-300">{lowTemp}</p>
         <p className="text-xs leading-loose text-stone-300">{precipitation}</p>
@@ -148,7 +146,7 @@ const ForecastDay: React.FC<ForecastDayProps> = ({
 
 const WeatherForecast: React.FC<WeatherForecastProps> = ({ forecast }) => {
   return (
-    <section className="flex justify-between items-start px-0 py-1.5">
+    <section className="flex justify-between items-start space-x-2 py-1.5">
       {forecast.map((day, index) => (
         <React.Fragment key={`forecast-day-${index}`}>
           <ForecastDay
@@ -177,7 +175,7 @@ export default function WeatherCard({ weather }: WeatherCardProps) {
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
         rel="stylesheet"
       />
-      <article className="p-5 bg-slate-600 h-auto w-auto max-md:scale-90 max-sm:scale-[0.8] font-['Inter'] rounded-lg">
+      <article className="flex flex-col p-[1rem] space-y-[1rem] bg-slate-600 h-auto w-auto max-md:scale-90 max-sm:scale-[0.8] font-['Inter'] rounded-lg">
         <WeatherHeader
           city={weather.header.city}
           country={weather.header.country}

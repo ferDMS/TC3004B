@@ -25,7 +25,7 @@ export default function WeatherSearchBar({ onSearch }: SearchBarProps) {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for a city..."
-        className="px-[0.5rem] rounded-md text-slate-600 placeholder-slate-400  bg-slate-200"
+        className="px-[0.5rem] rounded-md text-slate-600 placeholder-slate-400  bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-600"
       />
       <button type="submit" className="p-2 bg-slate-600 text-slate-200 rounded">
         Search
