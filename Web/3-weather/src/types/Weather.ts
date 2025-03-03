@@ -1,4 +1,4 @@
-export default interface Weather {
+export interface Weather {
   header: {
     city: string;
     country: string;

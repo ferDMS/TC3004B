@@ -5,48 +5,8 @@ import { useState } from "react";
 import WeatherCardDemo from "@/components/WeatherCardDemo";
 import WeatherCard from "@/components/WeatherCard";
 import WeatherSearchBar from "@/components/WeatherSearchBar";
-import Weather from "@/types/Weather";
-
-interface GeolocationAPIResponse {
-  results: {
-    id: number;
-    name: string;
-    latitude: number;
-    longitude: number;
-    country: string;
-  }[];
-}
-
-interface WeatherAPIResponse {
-  current_units: {
-    temperature_2m: string;
-    wind_speed_10m: string;
-    visibility: string;
-    uv_index: string;
-  };
-  current: {
-    time: Date;
-    temperature_2m: number;
-    wind_speed_10m: number;
-    visibility: number;
-    uv_index: number;
-  };
-  daily_units: {
-    daylight_duration: string;
-    temperature_2m_max: string;
-    temperature_2m_min: string;
-    precipitation_sum: string;
-  };
-  daily: {
-    sunrise: Date[];
-    sunset: Date[];
-    daylight_duration: number[];
-    weather_code: number[];
-    temperature_2m_max: number[];
-    temperature_2m_min: number[];
-    precipitation_sum: number[];
-  };
-}
+import { Weather } from "@/types/Weather";
+import { GeolocationAPIResponse, WeatherAPIResponse } from "@/types/WeatherAPI";
 
 const getTime = (date: Date): string => {
   const hours = date.getHours().toString().padStart(2, "0"); // Ensure two-digit format

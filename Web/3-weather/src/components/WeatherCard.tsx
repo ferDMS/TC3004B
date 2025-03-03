@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import Weather from "@/types/Weather";
+import { Weather } from "@/types/Weather";
 
 // Card = Header + Stats + Forecast
 interface WeatherCardProps {
