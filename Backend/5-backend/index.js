@@ -8,7 +8,11 @@ app.get("/hello/:name", (request, response) => {
 
 app.get("/hello", (request, response) => {
   const { name } = request.query;
-  response.json({ message: `Hello (through params) ${name}` });
+  // If no query parameter was passed return error
+  if (!name) {
+    return response.status(400).json({ message: "Missing parameter 'name'" });
+  }
+  response.status(201).json({ message: `Hello (through params) ${name}` });
 });
 
 app.listen(3001, () => {
